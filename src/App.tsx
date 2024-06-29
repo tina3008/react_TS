@@ -1,4 +1,4 @@
-import { Header, Loader } from 'components';
+import { Header, Loader } from 'components/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { useEffect } from 'react';
@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setBaseCurrency } from 'reduxState/currencySlice';
 
 const HomePage = lazy(() => import('./pages/Home'));
-const Rates = lazy(() => import('./pages/Rates.jsx'));
+const Rates = lazy(() => import('./pages/Rates.js'));
 export const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {

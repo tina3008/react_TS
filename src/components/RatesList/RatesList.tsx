@@ -1,4 +1,4 @@
-import { Grid, GridItem } from 'components';
+import { Grid, GridItem } from 'components/index';
 import styles from './RatesList.module.css';
 export const RatesList = ({ rates }) => {
   return (

@@ -7,7 +7,7 @@ import {
   Loader,
   RatesList,
   Section,
-} from 'components';
+} from 'components/index';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectBaseCurrency,
