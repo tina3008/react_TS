@@ -7,7 +7,7 @@ import {
   Loader,
   RatesList,
   Section,
-} from 'components/index';
+} from '../components/index';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectBaseCurrency,
@@ -15,9 +15,9 @@ import {
   selectIsError,
   selectIsLoading,
   selectRates,
-} from 'reduxState/selertors';
+} from '../reduxState/selertors';
 import { useEffect } from 'react';
-import { fetchRates } from 'reduxState/operations';
+import { fetchRates } from '../reduxState/operations';
 
 const Rates = () => {
   const dispatch = useDispatch();

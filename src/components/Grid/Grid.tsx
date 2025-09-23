@@ -1,5 +1,7 @@
 import style from './Grid.module.css';
-
-export const Grid = ({ children }) => {
+type GridProps = {
+  children: React.ReactNode;
+};
+export const Grid = ({ children }: GridProps) => {
   return <ul className={style.list}>{children}</ul>;
 };

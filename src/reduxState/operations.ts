@@ -1,44 +1,52 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { exchangeCurrency, latestRates } from 'service/exchangeAPI';
-import { getUserInfo } from 'service/opencagedataApi';
+import { exchangeCurrency, ExchangeResult, latestRates } from '../service/exchangeAPI';
+import { getUserInfo } from '../service/opencagedataApi';
+import type { RootState } from './store'; 
 
-export const fetchBaseCurrency = createAsyncThunk(
-  'currency/fetchBaseCurrency',
-  async (coords, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const { baseCurrency } = state.currency;
+type RatesArray = [string, number][];
 
-    if (baseCurrency) {
-      return thunkAPI.rejectWithValue('We already have base currency!');
-    }
-    try {
-      const response = await getUserInfo(coords);
-      return response.results[0].annotations.currency.iso_code;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
-export const fetchExchangeCurrency = createAsyncThunk(
-  'currency/fetchExchangeCurrency',
-  async (currency, thunkAPI) => {
-    try {
-      const data = await exchangeCurrency(currency);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
-export const fetchRates = createAsyncThunk(
-  'currency/fetchLatestRates',
-  async (baseCurrency, thunkAPI) => {
-    try {
-      const data = await latestRates(baseCurrency);
+export const fetchBaseCurrency = createAsyncThunk<
+  string, // ReturnType
+  { latitude: number; longitude: number }, // ArgType
+  { state: RootState; rejectValue: string }
+>('currency/fetchBaseCurrency', async (coords, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const { baseCurrency } = state.currency;
 
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
+  if (baseCurrency) {
+    return thunkAPI.rejectWithValue('We already have base currency!');
+  }
+  try {
+    const response = await getUserInfo(coords);
+    return response.results[0].annotations.currency.iso_code;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const fetchExchangeCurrency = createAsyncThunk<
+  ExchangeResult, // ReturnType
+  { from: string; to: string; amount: number }, // ArgType
+  { rejectValue: string }
+>('currency/fetchExchangeCurrency', async (currency, thunkAPI) => {
+  try {
+    const data = await exchangeCurrency(currency);
+    return data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const fetchRates = createAsyncThunk<
+  RatesArray, // ReturnType
+  string, // ArgType (baseCurrency)
+  { rejectValue: string }
+>('currency/fetchLatestRates', async (baseCurrency, thunkAPI) => {
+  try {
+    const data = await latestRates(baseCurrency);
+
+    return data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

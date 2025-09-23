@@ -1,5 +1,11 @@
 import styles from './ExchangeInfo.module.css';
-
+const ExchangeInfoProps = {
+  amount: number,
+  from: string,
+  to: string,
+  rate: number | string | null,
+  result: number | string | null,
+};
 export const ExchangeInfo = ({ amount, from, to, rate, result }) => {
   return (
     <div className={styles.wrapper}>

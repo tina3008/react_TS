@@ -1,11 +1,12 @@
 import { setFilter } from '../../reduxState/filterSlice';
 import styles from './Filter.module.css';
 import { useDispatch } from 'react-redux';
+import React, { FormEvent } from 'react';
 
 export const Filter = () => {
   const dispatch = useDispatch();
 
-  const handleChange = event => {
+  const handleChange = (event: React.ChangeEvent) => {
     dispatch(setFilter(event.target.value));
   };
 

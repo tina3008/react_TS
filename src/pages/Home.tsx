@@ -5,13 +5,13 @@ import {
   Heading,
   Loader,
   Section,
-} from 'components/index';
+} from '../components/index';
 import { useSelector } from 'react-redux';
 import {
   selectExchangeInfo,
   selectIsError,
   selectIsLoading,
-} from 'reduxState/selertors';
+} from '../reduxState/selertors';
 
 const Home = () => {
   const exchangeInfo = useSelector(selectExchangeInfo);

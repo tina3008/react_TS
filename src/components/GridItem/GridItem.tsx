@@ -1,5 +1,9 @@
 import style from './GridItem.module.css';
 
-export const GridItem = ({ children }) => {
+type GridItemProps = {
+  children: React.ReactNode;
+};
+
+export const GridItem = ({ children }: GridItemProps) => {
   return <li className={style.item}>{children}</li>;
 };

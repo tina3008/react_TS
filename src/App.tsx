@@ -9,16 +9,27 @@ import { setBaseCurrency } from 'reduxState/currencySlice';
 
 const HomePage = lazy(() => import('./pages/Home'));
 const Rates = lazy(() => import('./pages/Rates.js'));
+
+interface GeolocationCoordinates {
+  latitude: number;
+  longitude: number;
+  altitude: number | null;
+  accuracy: number;
+  altitudeAccuracy: number | null;
+  heading: number | null;
+  speed: number | null;
+}
+
 export const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const options = {
+    const options: PositionOptions = {
       enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0,
-    };
+    };    
 
-    function success(pos) {
+    function success(pos: GeolocationPosition) {
       dispatch(fetchBaseCurrency(pos.coords));
     }
 
