@@ -1,7 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { exchangeCurrency, ExchangeResult, latestRates } from '../service/exchangeAPI';
+import {
+  exchangeCurrency,
+  ExchangeResult,
+  latestRates,
+} from '../service/exchangeAPI';
 import { getUserInfo } from '../service/opencagedataApi';
-import type { RootState } from './store'; 
+import type { RootState } from './store';
 
 type RatesArray = [string, number][];
 
@@ -25,8 +29,8 @@ export const fetchBaseCurrency = createAsyncThunk<
 });
 
 export const fetchExchangeCurrency = createAsyncThunk<
-  ExchangeResult, // ReturnType
-  { from: string; to: string; amount: number }, // ArgType
+  ExchangeResult, 
+  { from: string; to: string; amount: number }, 
   { rejectValue: string }
 >('currency/fetchExchangeCurrency', async (currency, thunkAPI) => {
   try {

@@ -13,7 +13,7 @@ interface CurrencyState {
   exchangeInfo: ExchangeInfo | null;
   isLoading: boolean;
   isError: string | null;
-  rates: [string, number | string][];
+  rates: [string, number][];
 }
 
 const initialState: CurrencyState = {

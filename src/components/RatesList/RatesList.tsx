@@ -2,7 +2,7 @@ import { Grid, GridItem } from 'components/index';
 import styles from './RatesList.module.css';
 
 type RatesListProps = {
-  rates: { key: string; value: string }[];
+  rates: { key: string; value: number }[];
 };
 
 export const RatesList = ({ rates }: RatesListProps) => {
