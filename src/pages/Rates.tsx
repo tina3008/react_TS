@@ -8,7 +8,7 @@ import {
   RatesList,
   Section,
 } from '../components/index';
-import { useDispatch, useSelector } from 'react-redux';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import {
   selectBaseCurrency,
   selectFilteredRates,
@@ -18,17 +18,23 @@ import {
 } from '../reduxState/selertors';
 import { useEffect } from 'react';
 import { fetchRates } from '../reduxState/operations';
+import type { RootState, AppDispatch } from '../reduxState/store';
+
+  export const useAppDispatch: () => AppDispatch = useDispatch;
+  export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const Rates = () => {
-  const dispatch = useDispatch();
-  const isError = useSelector(selectIsError);
-  const isLoading = useSelector(selectIsLoading);
-  const baseCurrency = useSelector(selectBaseCurrency);
-  const filteredRates = useSelector(selectFilteredRates);
-  const rates = useSelector(selectRates);
+  const dispatch = useAppDispatch();
+  const isError = useAppSelector(selectIsError);
+  const isLoading = useAppSelector(selectIsLoading);
+  const baseCurrency = useAppSelector(selectBaseCurrency);
+  const filteredRates = useAppSelector(selectFilteredRates);
+  const rates = useAppSelector(selectRates);
+
   useEffect(() => {
     dispatch(fetchRates(baseCurrency));
   }, [baseCurrency, dispatch]);
+  
   return (
     <Section>
       <Container>

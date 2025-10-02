@@ -1,7 +1,11 @@
 import { Grid, GridItem } from 'components/index';
 import styles from './RatesList.module.css';
 
-export const RatesList = ({ rates }) => {
+type RatesListProps = {
+  rates: { key: string; value: string }[];
+};
+
+export const RatesList = ({ rates }: RatesListProps) => {
   return (
     <Grid>
       {rates.map(({ key, value }) => (

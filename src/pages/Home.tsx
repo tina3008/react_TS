@@ -2,27 +2,30 @@ import {
   Container,
   ExchangeForm,
   ExchangeInfo,
+  ExchangeInfoProps,
   Heading,
   Loader,
   Section,
 } from '../components/index';
-import { useSelector } from 'react-redux';
+import { useSelector, TypedUseSelectorHook } from 'react-redux';
 import {
   selectExchangeInfo,
   selectIsError,
   selectIsLoading,
 } from '../reduxState/selertors';
+import type { RootState, AppDispatch } from '../reduxState/store';
 
 const Home = () => {
-  const exchangeInfo = useSelector(selectExchangeInfo);
-  const isError = useSelector(selectIsError);
-  const isLoading = useSelector(selectIsLoading);
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const exchangeInfo = useAppSelector(selectExchangeInfo)as ExchangeInfoProps | null;
+  const isError = useAppSelector(selectIsError);
+  const isLoading = useAppSelector(selectIsLoading);
 
   return (
     <Section>
       <Container>
         <ExchangeForm />
-        {!exchangeInfo && !isError && (
+        {!exchangeInfo && !isError && (     
           <Heading info title="What currencies do you want to exchange?🙂" />
         )}
         {exchangeInfo && <ExchangeInfo {...exchangeInfo} />}

@@ -1,18 +1,28 @@
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 
 import symbols from './symbols.json';
-
 import styles from './SelectRates.module.css';
 
 import './ReactSelect.css';
 import { useDispatch } from 'react-redux';
 import { setBaseCurrency } from '../../reduxState/currencySlice';
 
-export const SelectRates = ({ baseCurrency }) => {
-  const dispatch = useDispatch();
-  const handleChange = ({ value }) => {
-    dispatch(setBaseCurrency(value));
+import { useAppDispatch } from '../Filter/Filter';
+
+type SelectRatesProps = {
+  baseCurrency: string;
+};
+export const SelectRates = ({ baseCurrency }: SelectRatesProps) => {
+
+    type OptionType = { value: string; label: string };
+
+    const handleChange = (option: SingleValue<OptionType>) => {
+      if (option) {
+        dispatch(setBaseCurrency(option.value));
+      }
   };
+  
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.box}>

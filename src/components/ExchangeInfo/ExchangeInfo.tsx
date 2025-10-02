@@ -1,12 +1,18 @@
 import styles from './ExchangeInfo.module.css';
-const ExchangeInfoProps = {
-  amount: number,
-  from: string,
-  to: string,
-  rate: number | string | null,
-  result: number | string | null,
+export type ExchangeInfoProps = {
+  amount: number;
+  from: string;
+  to: string;
+  rate: number | string | null;
+  result: number | string | null;
 };
-export const ExchangeInfo = ({ amount, from, to, rate, result }) => {
+export const ExchangeInfo = ({
+  amount,
+  from,
+  to,
+  rate,
+  result,
+}: ExchangeInfoProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.box}>
@@ -22,7 +28,7 @@ export const ExchangeInfo = ({ amount, from, to, rate, result }) => {
         </p>
 
         <p className={styles.title}>
-          {result.toFixed(2)} {to}
+          {typeof result === 'number' ? result.toFixed(2) : result ?? '-'} {to}
         </p>
       </div>
     </div>
