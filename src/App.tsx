@@ -1,4 +1,4 @@
-import { Header, Loader } from 'components/index';
+import { Header, Loader, useAppDispatch } from 'components/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { useEffect } from 'react';
@@ -21,7 +21,7 @@ interface GeolocationCoordinates {
 }
 
 export const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const options: PositionOptions = {
       enableHighAccuracy: true,
